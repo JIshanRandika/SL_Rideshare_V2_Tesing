@@ -1,118 +1,171 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import * as React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+function RideScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Ride!</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+    );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+function HomeScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Home!</Text>
+        </View>
+    );
+}
 
-export default App;
+function DriveScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Drive!</Text>
+        </View>
+    );
+}
+
+// @ts-ignore
+function MyTabBar({ state, descriptors, navigation }) {
+    // @ts-ignore
+    // @ts-ignore
+    return (
+        <View style={{ flexDirection: 'row', backgroundColor:'white' }}>
+            {state.routes.map((route: { key: string | number; name: any; }, index: any) => {
+                const { options } = descriptors[route.key];
+                const label =
+                    options.tabBarLabel !== undefined
+                        ? options.tabBarLabel
+                        : options.title !== undefined
+                        ? options.title
+                        : route.name;
+
+                const isFocused = state.index === index;
+
+                const onPress = () => {
+                    const event = navigation.emit({
+                        type: 'tabPress',
+                        target: route.key,
+                    });
+
+                    if (!isFocused && !event.defaultPrevented) {
+                        navigation.navigate(route.name);
+                    }
+                };
+
+                const onLongPress = () => {
+                    navigation.emit({
+                        type: 'tabLongPress',
+                        target: route.key,
+                    });
+                };
+                if(label=="Ride"){
+                    return (
+                        <TouchableOpacity
+                            accessibilityRole="button"
+                            accessibilityState={isFocused ? { selected: true } : {}}
+                            accessibilityLabel={options.tabBarAccessibilityLabel}
+                            testID={options.tabBarTestID}
+                            onPress={onPress}
+                            onLongPress={onLongPress}
+                            style={{ flex: 1, borderRadius:50, backgroundColor:'red' ,width:10, margin:10}}
+                        >
+                            <View style={{ flexDirection: 'row', alignItems:"center",alignSelf:"center" }}>
+                                <View style={{backgroundColor:'blue',width:50,height:50,borderRadius:50}}>
+
+                                </View>
+                                <View style={{backgroundColor:'blue',width:80,height:5,borderRadius:50}}>
+
+                                </View>
+                            </View>
+                            {/*<Text style={{ color: isFocused ? '#673ab7' : '#222',textAlign:"center" }}>*/}
+                            {/*    {label}*/}
+                            {/*</Text>*/}
+
+
+                        </TouchableOpacity>
+                    );
+                }
+
+                if(label=="Home"){
+                    return (
+                        <TouchableOpacity
+                            accessibilityRole="button"
+                            accessibilityState={isFocused ? { selected: true } : {}}
+                            accessibilityLabel={options.tabBarAccessibilityLabel}
+                            testID={options.tabBarTestID}
+                            onPress={onPress}
+                            onLongPress={onLongPress}
+                            style={{ flex: 1, borderRadius:100 }}
+                        >
+
+                            <Text style={{ color: isFocused ? '#673ab7' : '#222',textAlign:"center" }}>
+                                {label}
+                            </Text>
+
+
+                        </TouchableOpacity>
+                    );
+                }
+
+                if(label=="Drive"){
+                    return (
+                        <TouchableOpacity
+                            accessibilityRole="button"
+                            accessibilityState={isFocused ? { selected: true } : {}}
+                            accessibilityLabel={options.tabBarAccessibilityLabel}
+                            testID={options.tabBarTestID}
+                            onPress={onPress}
+                            onLongPress={onLongPress}
+                            style={{ flex: 1, borderRadius:50, backgroundColor:'red' ,width:10, margin:10 }}
+                        >
+
+                            {/*<Text style={{ color: isFocused ? '#673ab7' : '#222',textAlign:"center" }}>*/}
+                            {/*    {label}*/}
+                            {/*</Text>*/}
+                            <View style={{ flexDirection: 'row', alignItems:"center" ,alignSelf:"center"}}>
+                                <View style={{backgroundColor:'blue',width:80,height:5,borderRadius:50}}>
+
+                                </View>
+                                <View style={{backgroundColor:'blue',width:50,height:50,borderRadius:50}}>
+
+                                </View>
+
+                            </View>
+
+
+                        </TouchableOpacity>
+                    );
+                }
+
+            })}
+        </View>
+    );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarStyle: {
+                        height: 90,
+                        paddingHorizontal: 5,
+                        paddingTop: 0,
+                        backgroundColor: 'rgba(34,36,40,1)',
+                        position: 'absolute',
+                        borderTopWidth: 0,
+                    },
+                })}
+                tabBar={(props) => <MyTabBar {...props} />}>
+                <Tab.Screen name="Ride" component={RideScreen} />
+                <Tab.Screen name="Home" component={HomeScreen} />
+                <Tab.Screen name="Drive" component={DriveScreen} />
+            </Tab.Navigator>
+        </NavigationContainer>
+    );
+}
