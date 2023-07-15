@@ -1,10 +1,74 @@
 import * as React from 'react';
-import {Image, Text, View, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import {
+    Image,
+    Text,
+    View,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity,
+    Modal,
+    Alert,
+    Pressable,
+    StyleSheet,
+} from 'react-native';
 import {Colors} from '../constants/colors'
 
 
 export default function RegisterVerifyNICCardScreen({navigation}) {
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const handleStart = () => {
+        navigation.navigate('RegisterStep3');
+        setModalVisible(!modalVisible);
+    };
 
+    const styles = StyleSheet.create({
+        centeredView: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 22,
+        },
+        modalView: {
+            margin: 20,
+            backgroundColor: 'white',
+            borderRadius: 20,
+            padding: 35,
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 4,
+            elevation: 5,
+        },
+        button: {
+            borderRadius: 20,
+            padding: 10,
+            elevation: 2,
+        },
+        buttonOpen: {
+            backgroundColor: '#F194FF',
+        },
+        buttonClose: {
+            backgroundColor: '#2196F3',
+        },
+        textStyle: {
+            color: 'white',
+            fontWeight: 'bold',
+            textAlign: 'center',
+        },
+        modalText: {
+            marginBottom: 15,
+            textAlign: 'center',
+        },
+        blurredBackground: {
+            ...StyleSheet.absoluteFillObject,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust the opacity as needed
+            zIndex: -1,
+        },
+    });
     return (
         <View style={{flex:1,backgroundColor: Colors.background}}>
 
@@ -24,11 +88,38 @@ export default function RegisterVerifyNICCardScreen({navigation}) {
 
             </View>
             <View style={{flex:2, alignItems:'center'}} >
-            <TouchableOpacity onPress={()=>navigation.navigate('RegisterStep3')} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:340}}>
-                <Text style={{fontWeight:'bold',color:Colors.colorD}}>Start</Text>
-            </TouchableOpacity>
+                <View style={styles.centeredView}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert('Modal has been closed.');
+                            setModalVisible(!modalVisible);
+                        }}>
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Image source={require('../assets/images/success.png')}/>
+                                <Text style={{fontWeight:'bold',color:Colors.colorE,marginVertical:10}}>NIC Verification is Successful!</Text>
+                                <TouchableOpacity onPress={handleStart} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:240}}>
+                                    <Text style={{fontWeight:'bold',color:Colors.colorD}}>Next</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={styles.blurredBackground} />
+                    </Modal>
+                    <TouchableOpacity onPress={() => setModalVisible(true)} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:340}}>
+                        <Text style={{fontWeight:'bold',color:Colors.colorD}}>Start</Text>
+                    </TouchableOpacity>
+                </View>
+            {/*<TouchableOpacity onPress={()=>navigation.navigate('RegisterStep3')} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:340}}>*/}
+            {/*    <Text style={{fontWeight:'bold',color:Colors.colorD}}>Start</Text>*/}
+            {/*</TouchableOpacity>*/}
             </View>
+
+
         </View>
 
     );
+
 }
