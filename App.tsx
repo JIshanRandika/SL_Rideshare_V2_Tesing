@@ -6,7 +6,7 @@ import StackNavigation from "./src/navigations/stackNavigation";
 export default function App() {
     return (
 
-            <Navigation/>
+            <StackNavigation/>
 
     );
 }

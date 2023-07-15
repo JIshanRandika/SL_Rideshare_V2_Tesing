@@ -82,7 +82,8 @@ function MyTabBar({ state, descriptors, navigation }) {
                             style={{ flex: 1, borderRadius:50, backgroundColor:Colors.colorA ,width:10, margin:10}}
                         >
                             <View style={{ flexDirection: 'row', alignItems:"center",alignSelf:"center" }}>
-                                <View style={{backgroundColor:Colors.colorD,width:50,height:50,borderRadius:50,
+                                <View style={{
+                                    backgroundColor:Colors.colorD,width:50,height:50,borderRadius:50,
                                     shadowColor: Colors.colorD,
                                     shadowOffset:{
                                         width: 0,
@@ -91,30 +92,9 @@ function MyTabBar({ state, descriptors, navigation }) {
                                     shadowOpacity: 0.58,
                                     shadowRadius: 50.00,
                                     elevation: 24,
+                                    padding:6
                                 }}>
-
-                                    <View style={{flex: 1,
-                                        justifyContent: 'center',
-                                        alignSelf: 'center'}}>
-                                        <Passenger iconColor='green'/>
-                                        {/*<Passenger width={50} fill='red'/>*/}
-                                    </View>
-                                    {/*<SvgUri*/}
-                                    {/*    width={45}*/}
-                                    {/*    height={45}*/}
-                                    {/*    source={Image.resolveAssetSource(require('../assets/icons/Passenger.svg'))}*/}
-                                    {/*    style={{ width:45,height:45,borderRadius: 20 }}*/}
-                                    {/*/>*/}
-
-                                    {/*<Svg width={200} height={200}>*/}
-                                    {/*<Image style={{width:45,height:45, borderRadius:20}} src={require('../assets/icons/Passenger.svg')}/>*/}
-
-                                    {/*<Image*/}
-                                    {/*        width={45}*/}
-                                    {/*        height={45}*/}
-                                    {/*        source={require('../assets/logo/logoB.png')}*/}
-                                    {/*    />*/}
-                                    {/*</Svg>*/}
+                                        <Passenger width={50} iconColor= {Colors.colorE} />
                                 </View>
                                 <View style={{backgroundColor:Colors.colorD,width:80,height:5,borderRadius:50,
                                     shadowColor: Colors.colorD,

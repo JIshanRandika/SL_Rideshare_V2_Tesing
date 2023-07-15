@@ -37,6 +37,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
                                 labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                textInputStyle={{ color: Colors.colorE }}
                                 value={firstname}
                                 label="First Name"
                                 onChangeText={(firstname) => setFirstname(firstname)}
@@ -46,6 +47,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
                                 labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                textInputStyle={{ color: Colors.colorE }}
                                 value={lastname}
                                 label="Last Name"
                                 onChangeText={(lastname) => setLastname(lastname)}
@@ -55,6 +57,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
                                 labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                textInputStyle={{ color: Colors.colorE }}
                                 value={nic}
                                 label="NIC Number"
                                 onChangeText={(nic) => setNic(nic)}
@@ -64,6 +67,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
                                 labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                textInputStyle={{ color: Colors.colorE }}
                                 value={dobString}
                                 label="Date of Birth"
                                 // onPress={() => setOpen(true)}
