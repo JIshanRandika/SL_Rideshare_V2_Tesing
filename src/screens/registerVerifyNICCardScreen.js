@@ -43,26 +43,6 @@ export default function RegisterVerifyNICCardScreen({navigation}) {
             shadowRadius: 4,
             elevation: 5,
         },
-        button: {
-            borderRadius: 20,
-            padding: 10,
-            elevation: 2,
-        },
-        buttonOpen: {
-            backgroundColor: '#F194FF',
-        },
-        buttonClose: {
-            backgroundColor: '#2196F3',
-        },
-        textStyle: {
-            color: 'white',
-            fontWeight: 'bold',
-            textAlign: 'center',
-        },
-        modalText: {
-            marginBottom: 15,
-            textAlign: 'center',
-        },
         blurredBackground: {
             ...StyleSheet.absoluteFillObject,
             backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust the opacity as needed
