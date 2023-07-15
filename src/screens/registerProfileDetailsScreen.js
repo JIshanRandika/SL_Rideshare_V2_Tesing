@@ -142,7 +142,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                         />
 
 
-                        <TouchableOpacity onPress={()=>navigation.navigate('RegisterStep2')} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50}}>
+                        <TouchableOpacity onPress={()=>navigation.navigate('RegisterStep4')} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50}}>
                             <Text style={{fontWeight:'bold',color:Colors.colorD}}>Next</Text>
                         </TouchableOpacity>
 

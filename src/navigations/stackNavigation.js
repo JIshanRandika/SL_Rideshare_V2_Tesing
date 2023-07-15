@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import RegisterVerifyNICScreen from "../screens/registerVerifyNICScreen";
 import RegisterVerifyNICCardScreen from "../screens/registerVerifyNICCardScreen";
 import RegisterProfileDetailsScreen from "../screens/registerProfileDetailsScreen";
+import PersonalDetailsScreen from '../screens/personalDetailsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from '../constants/colors'
 
@@ -38,6 +39,13 @@ export default function StackNavigation() {
                 component={RegisterProfileDetailsScreen}
                 options={{
                     title: 'Step 3',
+                }}
+            />
+            <Stack.Screen
+                name="RegisterStep4"
+                component={PersonalDetailsScreen}
+                options={{
+                    title: 'Step 4',
                 }}
             />
 
