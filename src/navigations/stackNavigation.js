@@ -4,6 +4,7 @@ import RegisterVerifyNICScreen from "../screens/registerVerifyNICScreen";
 import RegisterVerifyNICCardScreen from "../screens/registerVerifyNICCardScreen";
 import RegisterProfileDetailsScreen from "../screens/registerProfileDetailsScreen";
 import PersonalDetailsScreen from '../screens/personalDetailsScreen';
+import OTPScreen from '../screens/otpScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from '../constants/colors'
 
@@ -27,6 +28,7 @@ export default function StackNavigation() {
                 options={{headerShown:false}}
 
             />
+
             <Stack.Screen
                 name="RegisterStep2"
                 component={RegisterVerifyNICCardScreen}
@@ -34,6 +36,13 @@ export default function StackNavigation() {
                     title: 'Step 2',
                 }}
             />
+            {/*<Stack.Screen*/}
+            {/*    name="RegisterStep2"*/}
+            {/*    component={OTPScreen}*/}
+            {/*    options={{*/}
+            {/*        title: 'Step 2',*/}
+            {/*    }}*/}
+            {/*/>*/}
             <Stack.Screen
                 name="RegisterStep3"
                 component={RegisterProfileDetailsScreen}
@@ -46,6 +55,13 @@ export default function StackNavigation() {
                 component={PersonalDetailsScreen}
                 options={{
                     title: 'Step 4',
+                }}
+            />
+            <Stack.Screen
+                name="RegisterStep5"
+                component={OTPScreen}
+                options={{
+                    title: 'Step 5',
                 }}
             />
 

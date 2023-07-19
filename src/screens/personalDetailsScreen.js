@@ -52,7 +52,7 @@ export default function PersonalDetailsScreen({navigation}) {
     });
 
     const handleStart = () => {
-        navigation.navigate('RegisterStep3');
+        navigation.navigate('RegisterStep5');
         setModalVisible(!modalVisible);
     };
 
@@ -143,7 +143,7 @@ export default function PersonalDetailsScreen({navigation}) {
                             </Modal>
 
                             <TouchableOpacity onPress={() => setModalVisible(true)} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:340}}>
-                                <Text style={{fontWeight:'bold',color:Colors.colorD}}>Start</Text>
+                                <Text style={{fontWeight:'bold',color:Colors.colorD}}>Submit</Text>
                             </TouchableOpacity>
                         </View>
 
