@@ -95,6 +95,7 @@ android {
 
     namespace "com.sl_rideshare_v2_tesing"
     defaultConfig {
+        missingDimensionStrategy 'react-native-camera', 'general'
         applicationId "com.sl_rideshare_v2_tesing"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

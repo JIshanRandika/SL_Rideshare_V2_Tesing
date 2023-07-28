@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {Image, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Button} from 'react-native';
-import {Colors} from '../constants/colors'
+import {Colors} from '../../constants/colors'
 import {FormItem} from 'react-native-form-component';
 import DatePicker from 'react-native-date-picker';
-import Passenger from '../assets/icons/Passenger';
-import ImagePicker from 'react-native-image-picker';
+import Passenger from '../../assets/icons/Passenger';
 import axios from 'axios';
+import ImagePicker from 'react-native-image-crop-picker';
+import Propic from '../../assets/icons/Propic';
 
 export default function RegisterProfileDetailsScreen({navigation}) {
     const [username, setUsername] = React.useState('');
@@ -17,7 +18,26 @@ export default function RegisterProfileDetailsScreen({navigation}) {
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
 
-    const [imageURI, setImageURI] = React.useState(null);
+    // const [imageURI, setImageURI] = React.useState(null);
+
+    const defaultPickerOptions = {
+        cropping: true,
+
+    };
+    const [imgSrc, setImgSrc] = React.useState(null);
+
+    const recognizeFromCamera = async (options = defaultPickerOptions) => {
+        try {
+            const image = await ImagePicker.openCamera(options);
+            setImgSrc({uri: image.path});
+
+        } catch (err) {
+            if (err.message !== 'User cancelled image selection') {
+                console.error(err);
+            }
+        }
+    };
+
 
     // const pickImage = () => {
     //     ImagePicker.launchImageLibrary({ mediaType: 'photo' }, (response) => {
@@ -58,9 +78,23 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                 <ScrollView>
                     <View>
                         <View style={{ padding: 24, alignItems:'center'}}>
-                            <Passenger width={80}/>
-                            {imageURI && <Image style={{ width: 200, height: 200 }} />}
-                            {imageURI && <Button title="Upload Image"  />}
+                            <TouchableOpacity onPress={() => {
+                                recognizeFromCamera();
+                            }}
+                                              style={{
+                                                  // backgroundColor:'black',
+                                                  alignItems: 'center',
+                                                  borderRadius: 50,
+                                              }}
+                            >
+                                {imgSrc && <Image style={{width:80, height:80,borderRadius:50}} source={imgSrc}/>}
+                                {!imgSrc && <Propic width={80} height={80} iconColor= {Colors.contentLetters}/>}
+                            </TouchableOpacity>
+
+
+                            {/*<Passenger width={80} height={80}/>*/}
+
+                            {/*{imageURI && <Button title="Upload Image"  />}*/}
                         </View>
 
                     </View>
@@ -70,7 +104,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
 
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={username}
                             label="User Name"
@@ -80,7 +114,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                         />
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={email}
                             label="Email"
@@ -90,7 +124,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                         />
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={phoneNumber}
                             label="Phone Number"
@@ -100,7 +134,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                         />
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={address}
                             label="Address"
@@ -110,7 +144,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                         />
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={postalCode}
                             label="Postal Code"
@@ -120,7 +154,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                         />
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={password}
                             label="Password"
@@ -131,7 +165,7 @@ export default function RegisterProfileDetailsScreen({navigation}) {
                         />
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={confirmPassword}
                             label="Confirm Password"

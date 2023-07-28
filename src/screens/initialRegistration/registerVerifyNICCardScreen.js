@@ -11,7 +11,7 @@ import {
     Pressable,
     StyleSheet, Button,
 } from 'react-native';
-import {Colors} from '../constants/colors'
+import {Colors} from '../../constants/colors'
 import ImagePicker from 'react-native-image-crop-picker';
 
 export default function RegisterVerifyNICCardScreen({navigation}) {
@@ -86,7 +86,7 @@ export default function RegisterVerifyNICCardScreen({navigation}) {
             {!imgSrc &&
                 <>
                     <View style={{flex:5, alignItems:'center'}} >
-                        <Image style={{width:340,height:300, borderRadius:20}} source={require('../assets/takePhoto.png')}/>
+                        <Image style={{width:340,height:300, borderRadius:20}} source={require('../../assets/takePhoto.png')}/>
 
                     </View>
                     <View style={{flex:5, alignItems:'center',alignContent:'center'}} >
@@ -115,7 +115,7 @@ export default function RegisterVerifyNICCardScreen({navigation}) {
                         }}>
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <Image source={require('../assets/images/success.png')}/>
+                                <Image source={require('../../assets/images/success.png')}/>
                                 <Text style={{fontWeight:'bold',color:Colors.colorE,marginVertical:10}}>NIC Verification is Successful!</Text>
                                 <TouchableOpacity onPress={handleStart} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:240}}>
                                     <Text style={{fontWeight:'bold',color:Colors.colorD}}>Next</Text>

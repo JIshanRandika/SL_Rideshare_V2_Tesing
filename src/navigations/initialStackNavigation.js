@@ -1,18 +1,20 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import RegisterVerifyNICScreen from "../screens/registerVerifyNICScreen";
-import RegisterVerifyNICCardScreen from "../screens/registerVerifyNICCardScreen";
-import RegisterProfileDetailsScreen from "../screens/registerProfileDetailsScreen";
-import PersonalDetailsScreen from '../screens/personalDetailsScreen';
-import OTPScreen from '../screens/otpScreen';
+import RegisterVerifyNICScreen from "../screens/initialRegistration/registerVerifyNICScreen";
+import RegisterVerifyNICCardScreen from "../screens/initialRegistration/registerVerifyNICCardScreen";
+import RegisterProfileDetailsScreen from "../screens/initialRegistration/registerProfileDetailsScreen";
+import PersonalDetailsScreen from '../screens/initialRegistration/personalDetailsScreen';
+import OTPScreen from '../screens/initialRegistration/otpScreen';
+import RefereeID from '../screens/initialRegistration/refereeScreen';
+import LoginScreen from '../screens/loginScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from '../constants/colors'
 
 const Stack = createStackNavigator();
 
-export default function StackNavigation() {
+export default function InitialStackNavigation() {
     return (
-        <NavigationContainer>
+        // <NavigationContainer>
         <Stack.Navigator
             initialRouteName="RegisterStep1"
             screenOptions={{
@@ -28,6 +30,12 @@ export default function StackNavigation() {
                 options={{headerShown:false}}
 
             />
+            <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{headerShown:false}}
+
+            />
 
             <Stack.Screen
                 name="RegisterStep2"
@@ -38,9 +46,9 @@ export default function StackNavigation() {
             />
             {/*<Stack.Screen*/}
             {/*    name="RegisterStep2"*/}
-            {/*    component={OTPScreen}*/}
+            {/*    component={RegisterProfileDetailsScreen}*/}
             {/*    options={{*/}
-            {/*        title: 'Step 2',*/}
+            {/*        title: 'Step 6',*/}
             {/*    }}*/}
             {/*/>*/}
             <Stack.Screen
@@ -64,10 +72,17 @@ export default function StackNavigation() {
                     title: 'Step 5',
                 }}
             />
+            <Stack.Screen
+                name="RegisterStep6"
+                component={RefereeID}
+                options={{
+                    title: 'Step 6',
+                }}
+            />
 
 
 
         </Stack.Navigator>
-        </NavigationContainer>
+        // </NavigationContainer>
     );
 }

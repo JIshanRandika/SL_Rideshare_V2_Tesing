@@ -10,7 +10,7 @@ import {
     TextInput,
     StyleSheet, Modal, Alert,
 } from 'react-native';
-import {Colors} from '../constants/colors'
+import {Colors} from '../../constants/colors'
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
@@ -58,7 +58,7 @@ export default function OtpScreen({navigation}) {
 
                     <View style={{ padding: 24 }}>
                         <View>
-                            <Text style={{ fontWeight: 3, color: Colors.colorE }}>
+                            <Text style={{ fontWeight: 3, color: Colors.contentLetters }}>
                                 Enter 4 digit verification code sent to you contact number
                             </Text>
                         </View>
@@ -78,7 +78,7 @@ export default function OtpScreen({navigation}) {
                             />
                         </View>
                         <View>
-                            <Text style={{ fontWeight: 3, color: Colors.colorE }}>
+                            <Text style={{ fontWeight: 3, color: Colors.contentLetters }}>
                                 Enter 4 digit verification code sent to you contact number
                             </Text>
                         </View>
@@ -117,7 +117,7 @@ export default function OtpScreen({navigation}) {
 
                         <View style={styles.centeredView}>
 
-                            <TouchableOpacity onPress={() => setModalVisible(true)} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:340}}>
+                            <TouchableOpacity onPress={()=>navigation.navigate('RegisterStep6')} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50,width:340}}>
                                 <Text style={{fontWeight:'bold',color:Colors.colorD}}>Confirm</Text>
                             </TouchableOpacity>
                         </View>

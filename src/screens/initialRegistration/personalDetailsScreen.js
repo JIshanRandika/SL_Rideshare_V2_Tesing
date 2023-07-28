@@ -10,9 +10,9 @@ import {
     TextInput,
     StyleSheet, Modal, Alert,
 } from 'react-native';
-import {Colors} from '../constants/colors'
+import {Colors} from '../../constants/colors'
 import {FormItem} from 'react-native-form-component';
-import Passenger from '../assets/icons/Passenger';
+import Passenger from '../../assets/icons/Passenger';
 
 
 export default function PersonalDetailsScreen({navigation}) {
@@ -67,7 +67,7 @@ export default function PersonalDetailsScreen({navigation}) {
 
                         <FormItem
                             style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                            labelStyle={{fontWeight:3,color:Colors.colorE}}
+                            labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                             textInputStyle={{ color: Colors.colorE }}
                             value={occupation}
                             label="Occupation"
@@ -77,7 +77,7 @@ export default function PersonalDetailsScreen({navigation}) {
                         />
 
                         <View>
-                            <Text style={{ fontWeight: 3, color: Colors.colorE }}>Who are you? (short description)</Text>
+                            <Text style={{ fontWeight: 3, color: Colors.contentLetters }}>Who are you? (short description)</Text>
                             <TextInput
                                 style={{
                                     padding:10,
@@ -95,7 +95,7 @@ export default function PersonalDetailsScreen({navigation}) {
                         </View>
 
                         <View style={{marginVertical:25}}>
-                            <Text style={{ fontWeight: 3, color: Colors.colorE }}>What are the diseases and disability you had in
+                            <Text style={{ fontWeight: 3, color: Colors.contentLetters }}>What are the diseases and disability you had in
                                 previous 3 months?</Text>
                             <TextInput
                                 style={{

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Image, Text, View, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
-import {Colors} from '../constants/colors'
+import {Colors} from '../../constants/colors'
 import {FormItem} from 'react-native-form-component';
 import DatePicker from 'react-native-date-picker'
 
@@ -25,7 +25,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                 justifyContent:'center'
             }}>
 
-                    <Image style={{width:100,height:100, borderRadius:20}} source={require('../assets/logo/logoA.jpg')}/>
+                    <Image style={{width:100,height:100, borderRadius:20}} source={require('../../assets/logo/logoA.jpg')}/>
 
             </View>
             <View style={{flex:6}}>
@@ -36,7 +36,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
 
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                                labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                                 textInputStyle={{ color: Colors.colorE }}
                                 value={firstname}
                                 label="First Name"
@@ -46,7 +46,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                             />
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                                labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                                 textInputStyle={{ color: Colors.colorE }}
                                 value={lastname}
                                 label="Last Name"
@@ -56,7 +56,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                             />
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                                labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                                 textInputStyle={{ color: Colors.colorE }}
                                 value={nic}
                                 label="NIC Number"
@@ -66,7 +66,7 @@ export default function RegisterVerifyNICScreen({navigation}) {
                             />
                             <FormItem
                                 style={{borderRadius:50,borderColor:Colors.colorD,borderWidth:2}}
-                                labelStyle={{fontWeight:3,color:Colors.colorE}}
+                                labelStyle={{fontWeight:3,color:Colors.contentLetters}}
                                 textInputStyle={{ color: Colors.colorE }}
                                 value={dobString}
                                 label="Date of Birth"
@@ -105,10 +105,10 @@ export default function RegisterVerifyNICScreen({navigation}) {
                 </SafeAreaView>
             </View>
             <View style={{alignSelf:'center',flexDirection:'row',flex:1}} >
-                <Text style={{fontWeight:2,color:Colors.colorE,textAlign:'center'}}>
+                <Text style={{fontWeight:2,color:Colors.contentLetters,textAlign:'center'}}>
                     Already have an account?
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
                     <Text style={{fontWeight:2,color:Colors.colorA,textAlign:'center'}}> Login</Text>
                 </TouchableOpacity>
             </View>
