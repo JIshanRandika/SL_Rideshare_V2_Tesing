@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Colors} from '../constants/colors'
-import MainHomeScreen from '../screens/home/mainHomeScreen';
+import GroupsScreen from '../screens/home/groups/groupsScreen';
+import GroupProfileScreen from '../screens/home/groups/groupProfileScreen';
 
 const Stack = createStackNavigator();
 
-
-export default function MainHomeNavigation() {
+export default function GroupsNavigation() {
     return (
         <Stack.Navigator
-            initialRouteName="mainHome"
+            initialRouteName="groupsScreen"
             screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: Colors.colorD,
@@ -18,10 +18,16 @@ export default function MainHomeNavigation() {
             }}
         >
             <Stack.Screen
-                name="mainHome"
-                component={MainHomeScreen}
-                options={{headerShown:false}}
+                name="groupsScreen"
+                component={GroupsScreen}
+                options={{headerTitle:'Groups'}}
             />
+            <Stack.Screen
+                name="groupProfileScreen"
+                component={GroupProfileScreen}
+                options={{headerTitle:'Group Profile'}}
+            />
+
 
 
 

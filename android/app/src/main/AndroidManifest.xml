@@ -13,7 +13,10 @@
             android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
     />
     <uses-permission android:name="android.permission.VIBRATE"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+            android:name="android.permission.ACCESS_FINE_LOCATION"
+    />
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -34,5 +37,8 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8"/>
     </application>
 </manifest>

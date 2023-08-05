@@ -3,6 +3,7 @@ import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './tabNavigation';
+import {Colors} from '../constants/colors';
 
 function HomeScreen({ navigation }) {
     return (
@@ -25,12 +26,47 @@ export default function DrawerNavigation() {
         <NavigationContainer>
             <Drawer.Navigator
                 screenOptions={{
-                    headerShown:false
+                    headerShown:false,
+                    drawerStyle: {
+                        backgroundColor: Colors.colorD,
+                        borderBottomRightRadius:20,
+                        borderTopRightRadius:20,
+                        opacity:1
+                    },
+
                 }}
 
+
                 initialRouteName="Home">
-                <Drawer.Screen name="Home" component={HomeScreen} />
-                <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+                <Drawer.Screen name="Home" component={HomeScreen}
+                               options={{
+                                   drawerLabel: 'Home',
+                                   drawerItemStyle:{
+                                       color:Colors.colorD,
+                                       backgroundColor:Colors.colorA,
+                                       padding:5,
+                                       borderRadius:10,
+                                   },
+                                   drawerLabelStyle:{
+                                       color:Colors.colorD,
+                                   }
+
+                               }}
+                />
+                <Drawer.Screen name="Notifications" component={NotificationsScreen}
+                               options={{
+                                   drawerLabel: 'Logout',
+                                   drawerItemStyle:{
+                                       color:Colors.colorD,
+                                       backgroundColor:Colors.colorB,
+                                       padding:5,
+                                       borderRadius:10,
+                                   },
+                                   drawerLabelStyle:{
+                                       color:Colors.colorD,
+                                   }
+                               }}
+                />
             </Drawer.Navigator>
         </NavigationContainer>
     );

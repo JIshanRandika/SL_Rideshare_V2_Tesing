@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Colors} from '../constants/colors'
-import MainHomeScreen from '../screens/home/mainHomeScreen';
+import TransactionHistoryScreen from '../screens/home/transactionHistory/transactionHistoryScreen';
 
 const Stack = createStackNavigator();
 
-
-export default function MainHomeNavigation() {
+export default function TransactionHistoryNavigation() {
     return (
         <Stack.Navigator
-            initialRouteName="mainHome"
+            initialRouteName="transactionHistoryScreen"
             screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: Colors.colorD,
@@ -18,10 +17,11 @@ export default function MainHomeNavigation() {
             }}
         >
             <Stack.Screen
-                name="mainHome"
-                component={MainHomeScreen}
-                options={{headerShown:false}}
+                name="transactionHistoryScreen"
+                component={TransactionHistoryScreen}
+                options={{headerTitle:'Transaction History'}}
             />
+
 
 
 

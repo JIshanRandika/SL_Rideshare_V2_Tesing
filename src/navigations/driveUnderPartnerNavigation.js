@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Colors} from '../constants/colors'
-import MainHomeScreen from '../screens/home/mainHomeScreen';
+import DriveUnderPartnerScreen from '../screens/driver/driveUnderPartner/driveUnderPartnerScreen';
 
 const Stack = createStackNavigator();
 
-
-export default function MainHomeNavigation() {
+export default function DriveUnderPartnerNavigation() {
     return (
         <Stack.Navigator
-            initialRouteName="mainHome"
+            initialRouteName="driveUnderPartner"
             screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: Colors.colorD,
@@ -18,10 +17,12 @@ export default function MainHomeNavigation() {
             }}
         >
             <Stack.Screen
-                name="mainHome"
-                component={MainHomeScreen}
+                name="driveUnderPartner"
+                component={DriveUnderPartnerScreen}
                 options={{headerShown:false}}
             />
+
+
 
 
 

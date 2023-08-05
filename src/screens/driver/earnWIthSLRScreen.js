@@ -89,7 +89,7 @@ export default function EarnWIthSLRScreen({navigation}) {
                 <View style={{flex:1,flexDirection:'row'}}>
                     <View style={{flex:4,flexDirection:'column', alignItems:'center'}}>
                         <TouchableOpacity
-
+                            onPress={()=>navigation.navigate('driveUnderPartner')}
                             style={{backgroundColor:'white',width:70,height:70, borderRadius:50,
                                 shadowColor: Colors.colorE,
                                 shadowOffset: {
@@ -121,7 +121,7 @@ export default function EarnWIthSLRScreen({navigation}) {
                 <View style={{flex:2,flexDirection:'row'}}>
                     <View style={{flex:4,flexDirection:'column', alignItems:'center'}}>
                         <TouchableOpacity
-
+                            onPress={()=>navigation.navigate('nonDrivingPartner')}
                             style={{backgroundColor:'white',width:70,height:70, borderRadius:50,
                                 shadowColor: Colors.colorE,
                                 shadowOffset: {

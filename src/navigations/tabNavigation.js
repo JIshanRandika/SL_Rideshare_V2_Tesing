@@ -15,6 +15,8 @@ import PassengerNavigation from './passengerNavigation';
 import MainHomeNavigation from './mainHomeNavigation';
 import ProcessingNavigation from './processingNavigation';
 import FavouriteRoutesNavigation from './favouriteRoutesNavigation';
+import TransactionHistoryNavigation from './transactionHistoryNavigation';
+import GroupsNavigation from './groupsNavigation';
 
 export const passengerSvg = `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -278,10 +280,16 @@ export default function TabNavigation(props) {
                 <Tab.Screen options={{ headerShown: false }} name="Drive" component={DriveScreen} />
                 <Tab.Screen
                     options={{ headerShown: false }}
-                    name="Routes" component={FavouriteRoutesNavigation} />
+                    name="routes" component={FavouriteRoutesNavigation} />
                 <Tab.Screen
                     options={{ headerShown: false }}
                     name="process" component={ProcessingNavigation} />
+                <Tab.Screen
+                    options={{ headerShown: false }}
+                    name="transactions" component={TransactionHistoryNavigation} />
+                <Tab.Screen
+                    options={{ headerShown: false }}
+                    name="groups" component={GroupsNavigation} />
             </Tab.Navigator>
         // </NavigationContainer>
     );

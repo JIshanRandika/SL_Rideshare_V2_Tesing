@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Colors} from '../constants/colors'
-import MainHomeScreen from '../screens/home/mainHomeScreen';
+import VehicleScreen from '../screens/driver/vehicle/vehicleScreen';
 
 const Stack = createStackNavigator();
 
-
-export default function MainHomeNavigation() {
+export default function VehicleNavigation() {
     return (
         <Stack.Navigator
-            initialRouteName="mainHome"
+            initialRouteName="vehicle"
             screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: Colors.colorD,
@@ -18,11 +17,10 @@ export default function MainHomeNavigation() {
             }}
         >
             <Stack.Screen
-                name="mainHome"
-                component={MainHomeScreen}
-                options={{headerShown:false}}
+                name="vehicle"
+                component={VehicleScreen}
+                options={{headerTitle:'Vehicle'}}
             />
-
 
 
         </Stack.Navigator>

@@ -124,7 +124,9 @@ export default function MainHomeScreen({navigation}) {
                     <Text style={{color:Colors.contentLetters,fontWeight:'bold',fontSize:12,marginTop:3}}>Withdraw</Text>
                 </View>
                 <View style={{flex:4,alignItems:'center',justifyContent:'center'}}>
-                    <TouchableOpacity style={{backgroundColor:'white',width:70,height:70, borderRadius:50,
+                    <TouchableOpacity
+                        onPress={()=>navigation.navigate('transactions')}
+                        style={{backgroundColor:'white',width:70,height:70, borderRadius:50,
                         shadowColor: Colors.colorE,
                         shadowOffset: {
                             width: 0,
@@ -146,7 +148,9 @@ export default function MainHomeScreen({navigation}) {
             {/*=====*/}
             <View style={{flexDirection:'row', margin:20}}>
                 <View style={{flex:4,alignItems:'center',justifyContent:'center'}}>
-                    <TouchableOpacity style={{backgroundColor:'white',width:70,height:70, borderRadius:50,
+                    <TouchableOpacity
+                        onPress={()=>navigation.navigate('groups')}
+                        style={{backgroundColor:'white',width:70,height:70, borderRadius:50,
                         shadowColor: Colors.colorE,
                         sshadowOffset: {
                             width: 0,
@@ -186,7 +190,7 @@ export default function MainHomeScreen({navigation}) {
                 </View>
                 <View style={{flex:4, alignItems:'center',justifyContent:'center'}}>
                     <TouchableOpacity
-                        onPress={()=>navigation.navigate('Routes')}
+                        onPress={()=>navigation.navigate('routes')}
                         style={{backgroundColor:'white',width:70,height:70, borderRadius:50,
                         shadowColor: Colors.colorE,
                         shadowOffset: {

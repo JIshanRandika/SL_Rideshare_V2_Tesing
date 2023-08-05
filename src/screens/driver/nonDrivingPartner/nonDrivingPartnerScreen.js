@@ -4,7 +4,7 @@ import {Colors} from '../../../constants/colors'
 import {AirbnbRating} from 'react-native-ratings';
 
 
-export default function FavouriteRoutesScreen({navigation}) {
+export default function NonDrivingPartnerScreen({navigation}) {
 
     return (
 
@@ -12,7 +12,7 @@ export default function FavouriteRoutesScreen({navigation}) {
             <View style={{flex:11}}>
                 <ScrollView contentContainerStyle={{alignItems:'center'}}>
                     <TouchableOpacity
-                        onPress={()=>navigation.navigate('favouriteRouteMapScreen')}
+                        onPress={()=>navigation.navigate('vehicle')}
                         style={{
                         width:"90%",backgroundColor:Colors.colorA,
                         marginVertical:20,
@@ -28,13 +28,21 @@ export default function FavouriteRoutesScreen({navigation}) {
                     }}>
                         <View style={{flexDirection:'row'}}>
                             <View>
-                                <Image style={{width:100,height:100, borderRadius:20,margin:20}} source={require('../../../assets/map.jpeg')}/>
+                                <Image style={{width:150,height:100, borderRadius:20,margin:20}} source={require('../../../assets/car.jpeg')}/>
                             </View>
-                            <View style={{flexDirection:'column',paddingVertical:20, paddingRight:20}}>
-                                <Text style={{fontWeight:'bold',fontSize:20,color:Colors.colorD}}>Home</Text>
-                                <Text style={{fontWeight:'bold',fontSize:15,color:Colors.colorD}}>From: Kalutara</Text>
-                                <Text style={{fontWeight:'bold',fontSize:15,color:Colors.colorD,width:200}}>asd sdf</Text>
+                            <View style={{flexDirection:'column',paddingVertical:20}}>
+                                <Text style={{fontWeight:'bold',fontSize:20,color:Colors.colorD}}>CAT 2236</Text>
+                                <Text style={{fontWeight:'bold',fontSize:15,color:Colors.colorD}}>Earned: 2560.00LKR</Text>
+                                <Text style={{fontWeight:'bold',fontSize:15,color:Colors.colorD,width:200}}>Trips: 20</Text>
 
+                                <AirbnbRating
+                                    count={5}
+                                    defaultRating={3}
+                                    size={20}
+                                    isDisabled={true}
+                                    showRating={false}
+                                    ratingContainerStyle={{padding:0,marginLeft:-80}}
+                                />
                             </View>
 
                         </View>
@@ -43,9 +51,7 @@ export default function FavouriteRoutesScreen({navigation}) {
 
 
 
-                    <TouchableOpacity
-                        onPress={()=>navigation.navigate('favouriteRouteCreateMapScreen')}
-                        style={{
+                    <TouchableOpacity style={{
                         width:"90%",backgroundColor:Colors.colorC,
                         marginVertical:20,
                         borderRadius:20,
