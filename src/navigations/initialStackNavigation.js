@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 export default function InitialStackNavigation() {
     return (
-        // <NavigationContainer>
+        <NavigationContainer>
         <Stack.Navigator
             initialRouteName="RegisterStep1"
             screenOptions={{
@@ -83,6 +83,6 @@ export default function InitialStackNavigation() {
 
 
         </Stack.Navigator>
-        // </NavigationContainer>
+        </NavigationContainer>
     );
 }

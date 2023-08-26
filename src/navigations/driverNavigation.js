@@ -43,7 +43,7 @@ export default function DriverNavigation() {
             <Stack.Screen
                 name="driveWithOwnVehicle"
                 component={DriveWithOwnVehicle}
-                options={{headerTitle:'Drive with Own Vehicle'}}
+                options={{headerShown:false}}
             />
 
             <Stack.Screen

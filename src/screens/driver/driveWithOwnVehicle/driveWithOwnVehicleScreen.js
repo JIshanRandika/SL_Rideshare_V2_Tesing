@@ -38,7 +38,9 @@ export default function DriveWithOwnVehicleScreen({navigation}) {
 
 
 
-                    <TouchableOpacity style={{
+                    <TouchableOpacity
+                        onPress={()=>navigation.navigate('licenseDetailScreen')}
+                        style={{
                         width:"90%",backgroundColor:Colors.colorC,
                         marginVertical:20,
                         borderRadius:20,

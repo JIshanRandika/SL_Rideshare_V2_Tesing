@@ -381,7 +381,7 @@ export default function ScheduledDriveMapCreateScreen({ navigation }) {
                             <Text style={{fontWeight:'bold',color:Colors.colorE,marginVertical:10}}>Successfully Scheduled</Text>
 
                             <TouchableOpacity onPress={handleStart} style={{backgroundColor:Colors.colorA,padding:10,alignItems:'center',borderRadius:50,width:240}}>
-                                <Text style={{fontWeight:'bold',color:Colors.colorD}}>Next</Text>
+                                <Text style={{fontWeight:'bold',color:Colors.colorD}}>Done</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

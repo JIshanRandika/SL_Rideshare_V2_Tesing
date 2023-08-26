@@ -8,15 +8,17 @@ import {
     TouchableOpacity,
     Button,
     TextInput,
-    StyleSheet,
+    StyleSheet, Modal, Alert,
 } from 'react-native';
 import {Colors} from '../../../../constants/colors'
 import SwitchSelector from "react-native-switch-selector";
 import SearchableDropdown from 'react-native-searchable-dropdown';
+import {FormItem} from 'react-native-form-component';
+import DatePicker from 'react-native-date-picker';
+import { format } from 'date-fns';
 
 
-
-export default function LiveDriveDetailsScreen({navigation}) {
+export default function DriveDetailsScreen({navigation}) {
     const [username, setUsername] = React.useState('');
     const optionsPBG = [
         { label: "Passengers", value: "Passengers" },
@@ -57,6 +59,28 @@ export default function LiveDriveDetailsScreen({navigation}) {
 
     ];
 
+    const routes = [
+        {
+            id: 1,
+            name: 'Home',
+        },
+        {
+            id: 2,
+            name: 'Office',
+        },
+        {
+            id: 3,
+            name: 'Company',
+        },
+        {
+            id: 4,
+            name: 'Not a favorite route',
+        },
+
+    ];
+
+    const [selectedRoutes, setSelectedRoutes] = React.useState('Not a favorite route');
+
     const [selectedItems, setSelectedItems] = React.useState(null);
     const [privatePublic, setPrivatePublic] = React.useState('Private');
     const [goodPassenger, setGoodPassenger] = React.useState('Passengers');
@@ -64,6 +88,23 @@ export default function LiveDriveDetailsScreen({navigation}) {
     const [freePaidPassenger, setFreePaidPassenger] = React.useState('Paid');
     const [kiloLtr, setKiloLtr] = React.useState('Kilogram');
 
+
+    const [startDate, setStartDate] = React.useState(new Date());
+    const [startDateString, setStartDateString] = React.useState('');
+    const [open, setOpen] = React.useState(false)
+    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+
+    // Inside the DriveDetailsScreen component
+    const [startTime, setStartTime] = React.useState(new Date());
+    const [startTimeString, setStartTimeString] = React.useState('');
+    const [isTimePickerVisible, setTimePickerVisible] = React.useState(false);
+
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const handleStart = () => {
+        setModalVisible(!modalVisible);
+        navigation.navigate('liveDriving');
+    };
 
     const handleItemSelect = (item) => {
         setSelectedItems(item.name);
@@ -194,35 +235,35 @@ export default function LiveDriveDetailsScreen({navigation}) {
                                 }}
                             />
                         </View>
-
+                        <View style={{marginVertical:10}}>
+                            <SwitchSelector
+                                textColor={Colors.colorA} //'#7a44cf'
+                                selectedColor={Colors.colorD}
+                                buttonColor={Colors.colorA}
+                                borderColor={Colors.colorA}
+                                hasPadding
+                                options={optionsKL}
+                                initial={0}
+                                onPress={(value) => {
+                                    setKiloLtr(value);
+                                }}
+                            />
+                        </View>
+                        <View style={{flexDirection:'row', paddingVertical:2}}>
+                            <View style={{flexDirection:'column', justifyContent:'center', flex:9}}>
+                                <Text style={{color:Colors.contentLetters}}>{kiloLtr=='Kilogram' ? "Availability (Kg)" : "Availability (L)"}</Text>
+                            </View>
+                            <View style={{flexDirection:'column', flex:3}}>
+                                <TextInput
+                                    style={styles.input}
+                                    // onChangeText={onChangeText}
+                                />
+                            </View>
+                        </View>
                         {freePaidGood == 'Paid' &&
 
                         <>
-                            <View style={{marginVertical:10}}>
-                                <SwitchSelector
-                                    textColor={Colors.colorA} //'#7a44cf'
-                                    selectedColor={Colors.colorD}
-                                    buttonColor={Colors.colorA}
-                                    borderColor={Colors.colorA}
-                                    hasPadding
-                                    options={optionsKL}
-                                    initial={0}
-                                    onPress={(value) => {
-                                        setKiloLtr(value);
-                                    }}
-                                />
-                            </View>
-                            <View style={{flexDirection:'row', paddingVertical:2}}>
-                                <View style={{flexDirection:'column', justifyContent:'center', flex:9}}>
-                                    <Text style={{color:Colors.contentLetters}}>{kiloLtr=='Kilogram' ? "Availability (Kg)" : "Availability (L)"}</Text>
-                                </View>
-                                <View style={{flexDirection:'column', flex:3}}>
-                                    <TextInput
-                                        style={styles.input}
-                                        // onChangeText={onChangeText}
-                                    />
-                                </View>
-                            </View>
+
 
                             <View style={{flexDirection:'row', paddingVertical:2}}>
                                 <View style={{flexDirection:'column', justifyContent:'center', flex:9}}>
@@ -281,21 +322,21 @@ export default function LiveDriveDetailsScreen({navigation}) {
                                 }}
                             />
                         </View>
-
+                        <View style={{flexDirection:'row', paddingVertical:2}}>
+                            <View style={{flexDirection:'column', justifyContent:'center', flex:9}}>
+                                <Text style={{color:Colors.contentLetters}}>Availability (Number of seats)</Text>
+                            </View>
+                            <View style={{flexDirection:'column', flex:3}}>
+                                <TextInput
+                                    style={styles.input}
+                                    // onChangeText={onChangeText}
+                                />
+                            </View>
+                        </View>
                         {freePaidPassenger == 'Paid' &&
 
                         <>
-                            <View style={{flexDirection:'row', paddingVertical:2}}>
-                                <View style={{flexDirection:'column', justifyContent:'center', flex:9}}>
-                                    <Text style={{color:Colors.contentLetters}}>Availability (Number of seats)</Text>
-                                </View>
-                                <View style={{flexDirection:'column', flex:3}}>
-                                    <TextInput
-                                        style={styles.input}
-                                        // onChangeText={onChangeText}
-                                    />
-                                </View>
-                            </View>
+
 
                             <View style={{flexDirection:'row', paddingVertical:2}}>
                                 <View style={{flexDirection:'column', justifyContent:'center', flex:9}}>
@@ -325,18 +366,74 @@ export default function LiveDriveDetailsScreen({navigation}) {
                     </>
 
                     }
+                    <SearchableDropdown
+                        onItemSelect={(item) => setSelectedRoutes(item)}
+                        containerStyle={{ padding: 5 }}
+                        onRemoveItem={handleItemRemove}
+                        // selectedItems={}
+                        itemStyle={{
+                            padding: 10,
+                            marginTop: 2,
+                            backgroundColor: '#ddd',
+                            borderColor: '#bbb',
+                            borderWidth: 1,
+                            borderRadius: 5,
+                        }}
+                        itemTextStyle={{ color: '#222' }}
+                        itemsContainerStyle={{ maxHeight: 140 }}
+                        items={routes}
+                        // defaultIndex={2}
+                        placeholder='Search Favourite Route'
+                        placeholderTextColor= {Colors.contentLetters}
+                        resetValue={false}
+                        textInputProps={{
+                            // placeholder: 'placeholder',
+                            placeholderColor:'black',
+                            underlineColorAndroid: 'transparent',
+                            style: {
+                                padding: 12,
+                                borderWidth: 1,
+                                borderColor: '#ccc',
+                                borderRadius: 5,
+                                color:'#ccc'
+                            },
 
+                            // value:selectedItems ? selectedItems.name : null
+
+                            // onTextChange: (text) => alert(text),
+                        }}
+                        listProps={{
+                            nestedScrollEnabled: true,
+                        }}
+                    />
+                    <View style={{flexDirection:'row', padding:10, alignItems:'center'}}>
+                        <Text style={{color:Colors.contentLetters, fontSize:15}}>{selectedRoutes ? 'Route: ': null}</Text>
+                        <Text style={{color:Colors.colorA, fontSize:15, fontWeight:'bold'}}>{selectedRoutes ? selectedRoutes.name : null}</Text>
+                    </View>
+
+
+
+
+
+
+
+                    {/*==================================*/}
 
 
 
                     <View style={{ padding: 24 }}>
-
-
-
-
+                        {(selectedRoutes=='Not a favorite route'||selectedRoutes.name=='Not a favorite route')&&
                         <TouchableOpacity onPress={()=>navigation.navigate('liveDriveMapCreate')} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50}}>
                             <Text style={{fontWeight:'bold',color:Colors.colorD}}>Next</Text>
                         </TouchableOpacity>
+                        }
+
+                        {(selectedRoutes!='Not a favorite route'&& selectedRoutes.name!='Not a favorite route')&&
+                        <TouchableOpacity onPress={() => setModalVisible(true)} style={{backgroundColor:Colors.colorA,padding:15,alignItems:'center',borderRadius:50}}>
+                            <Text style={{fontWeight:'bold',color:Colors.colorD}}>Finish</Text>
+                        </TouchableOpacity>
+                        }
+
 
 
                     </View>
@@ -346,6 +443,30 @@ export default function LiveDriveDetailsScreen({navigation}) {
 
 
             </SafeAreaView>
+
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={{fontWeight:'bold',color:Colors.colorE,marginVertical:10}}>Are you ready?</Text>
+
+                            <TouchableOpacity onPress={handleStart} style={{backgroundColor:Colors.colorA,padding:10,alignItems:'center',borderRadius:50,width:240}}>
+                                <Text style={{fontWeight:'bold',color:Colors.colorD}}>Yes</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.blurredBackground} />
+                </Modal>
+            </View>
+
+
         </View>
     );
 }
@@ -361,5 +482,32 @@ const styles = StyleSheet.create({
         borderColor: Colors.contentLetters,
         borderRadius: 10,
         paddingHorizontal:10
+    },
+    centeredView: {
+        // flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 0,
+        margin: 0
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    blurredBackground: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust the opacity as needed
+        zIndex: -1,
     },
 });
