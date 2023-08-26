@@ -14,6 +14,7 @@ import DriveUnderPartnerNavigation from './driveUnderPartnerNavigation';
 import VehicleNavigation from './vehicleNavigation';
 import ScheeduledDriveNavigation from './scheeduledDriveNavigation';
 import LiveDriveNavigation from './liveDriveNavigation';
+import VehicleStatisticsScreen from '../screens/driver/vehicle/vehicleStatistics/vehicleStatisticsScreen';
 
 const Stack = createStackNavigator();
 
@@ -103,6 +104,12 @@ export default function DriverNavigation() {
                 name="vehicleProfile"
                 component={VehicleProfileScreen}
                 options={{headerTitle:'Vehicle Profile'}}
+            />
+
+            <Stack.Screen
+                name="vehicleStatistics"
+                component={VehicleStatisticsScreen}
+                options={{headerTitle:'Vehicle Statistics'}}
             />
 
 

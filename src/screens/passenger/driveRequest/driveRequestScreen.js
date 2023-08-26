@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Text, View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import { Colors } from '../../../../constants/colors';
+import { Colors } from '../../../constants/colors';
 
-export default function RideRequestScreen({ navigation }) {
+export default function DriveRequestScreen({ navigation }) {
     const [status, setStatus] = React.useState('Pending');
 
     const handleCancel = () => {
