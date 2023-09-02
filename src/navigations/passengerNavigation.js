@@ -15,6 +15,9 @@ import AvailableRIdesDetailViewMapScreen
 import AvailableDrivesDetailViewScreen from '../screens/passenger/availableDrives/availableDrivesDetailViewScreen';
 import AvailableDrivesMapViewScreen from '../screens/passenger/availableDrives/availableDrivesMapViewScreen';
 import HireFindNavigation from './hireFindNavigation';
+import AvailableDrivesDetailsSearchScreen
+    from '../screens/passenger/availableDrives/availableDrivesDetailsSearchScreen';
+import AvailableDrivesMapSearchScreen from '../screens/passenger/availableDrives/availableDrivesMapSearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -82,6 +85,20 @@ export default function PassengerNavigation() {
                 component={AvailableDrivesDetailViewScreen}
                 options={{headerTitle:'Available Drives Detail'}}
             />
+
+            <Stack.Screen
+                name="availableDrivesDetailsSearch"
+                component={AvailableDrivesDetailsSearchScreen}
+                options={{headerTitle:'Ride Details'}}
+            />
+
+            <Stack.Screen
+                name="availableDrivesMapSearchScreen"
+                component={AvailableDrivesMapSearchScreen}
+                options={{headerTitle:'Ride Details'}}
+            />
+
+
         </Stack.Navigator>
     );
 }

@@ -128,7 +128,7 @@ export default function PassengerScreen({navigation}) {
                 }}>
                     <View style={{flexDirection:'column', flex:5,width:20,alignItems:'center',justifyContent:'center'}}>
                         <TouchableOpacity
-                            onPress={()=>navigation.navigate('availableDrivesMap')}
+                            onPress={()=>navigation.navigate('availableDrivesMapSearchScreen')}
                             style={{flexDirection:'row',backgroundColor:'white',width:'80%',height:'70%', borderRadius:10, shadowColor: Colors.colorE, shadowOffset: {width: 0, height: 2,}, shadowOpacity:  0.17, shadowRadius: 2.54, elevation: 3, alignItems:'center',justifyContent:'center'
                             }}>
                             <View style={{flex:5, alignItems:'center',justifyContent:'center'}}>
@@ -146,7 +146,7 @@ export default function PassengerScreen({navigation}) {
                     </View>
                     <View style={{flexDirection:'column', flex:5,width:20,alignItems:'center',justifyContent:'center'}}>
                         <TouchableOpacity
-                            onPress={()=>navigation.navigate('availableDrivesDetail')}
+                            onPress={()=>navigation.navigate('availableDrivesDetailsSearch')}
                             style={{flexDirection:'row',backgroundColor:'white',width:'80%',height:'70%', borderRadius:10, shadowColor: Colors.colorE, shadowOffset: {width: 0, height: 2,}, shadowOpacity:  0.17, shadowRadius: 2.54, elevation: 3, alignItems:'center',justifyContent:'center'
                             }}>
                             <View style={{flex:5, alignItems:'center',justifyContent:'center'}}>
