@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     StyleSheet, Button, Modal, Alert,
 } from 'react-native';
-import { Colors } from '../../../../constants/colors';
+import { Colors } from '../../../constants/colors';
 import MapView, {Circle, Marker} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import {useState} from 'react';
@@ -17,8 +17,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import axios from 'axios';
 import {FormItem} from 'react-native-form-component';
 
-export default function LiveDriveCreateMapScreen({ navigation }) {
-
+export default function HireVehicleOnMap({ navigation }) {
 
     const [locationsInputs, setLocationsInput] = useState([]);
     const [currentLocationDescription, setCurrentLocationDescription] = useState('Choose on map');
@@ -26,21 +25,16 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
     const [modalVisible, setModalVisible] = React.useState(false);
     const handleStart = () => {
         setModalVisible(!modalVisible);
-        navigation.navigate('liveDriving');
+        navigation.navigate('driveRequest');
     };
     const [routeName, setRouteName] = React.useState('');
 
     const handleAddTextInput = () => {
-        setLocationsInput([...locationsInputs, { description: '', latitude: null, longitude: null }]);
+        const newLabel = String.fromCharCode(65 + locationsInputs.length); // Generate the alphabetical label
+        setLocationsInput([...locationsInputs, { label: newLabel, description: '', latitude: null, longitude: null }]);
     };
 
-    const [isSearching, setIsSearching] = useState(false);
     const handlePlaceSelected = (data, details, index) => {
-
-        console.log("data")
-        console.log(data)
-        console.log("details")
-        console.log(details)
         const updatedInputs = [...locationsInputs];
         updatedInputs[index] = {
             ...updatedInputs[index],
@@ -58,37 +52,14 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
             latitudeDelta: currentLocation.latitudeDelta,
             longitudeDelta: currentLocation.longitudeDelta,
         });
-        // if (details.geometry.location.lat!=null){
-        //     setIsSearching(false)
-        // }
-
     };
 
     const handleRemoveTextInput = (index) => {
-        // setLocationsInput(locationsInputs.filter((loc, id) => id !==index))
-
         const updatedInputs = [...locationsInputs];
         updatedInputs.splice(index, 1);
         setLocationsInput(updatedInputs);
     };
 
-    React.useEffect(() => {
-        console.log(locationsInputs)
-        setIsSearching(false)
-        // if (locationsInputs.longitude!=null){
-        //     setIsSearching(false)
-        // }
-
-    },[locationsInputs])
-
-    React.useEffect(() => {
-        console.log(isSearching)
-        // setIsSearching(false)
-        // if (locationsInputs.longitude!=null){
-        //     setIsSearching(false)
-        // }
-
-    },[isSearching])
 
 
 
@@ -193,127 +164,7 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.background }}>
-            <View style={{backgroundColor: Colors.colorA, opacity:1, maxHeight: isSearching ? '100%' : 200 }}>
-                <ScrollView keyboardShouldPersistTaps="handled">
-                    <View style={{ flex: 1, padding: 16}}>
-                        {locationsInputs.map((locationsInput, index) => (
-                            <View key={index} style={{ marginTop: 8, flexDirection: 'row', alignItems: 'center'}}>
-                                {/* Display alphabetical label in front of the input */}
-                                <View style={{backgroundColor:Colors.colorD, width:30, height:30, borderRadius:50, alignItems:'center', justifyContent:'center', marginRight:5}}>
-                                    <Text style={{ fontSize: 15, color:Colors.contentLetters }}>
-                                        {/*{locationsInput.label}*/}
-                                        {String.fromCharCode(65+index)}
-                                    </Text>
-                                </View>
-                                <GooglePlacesAutocomplete
-                                    ref={ref => {
-                                        if (ref?.getAddressText() && ref?.getAddressText().length<6){
-                                            setIsSearching(true)
-                                        }
-
-                                        setTimeout(()=>{
-                                            ref?.setAddressText(locationsInput && locationsInput.description)
-                                            // setIsSearching(true)
-                                        },1500)
-
-                                    }}
-                                    predefinedPlaces={[yourLocation,chooseOnMap]}
-                                    predefinedPlacesAlwaysVisible={true}
-                                    // description={locationsInput.description}
-                                    // description={locationsInput.description}
-                                    // onTextInputFocus={() => setIsSearching(true)}
-                                    // onTextInputBlur={() => setIsSearching(false)}
-
-
-
-
-
-                                    autoFillOnNotFound={true}
-                                    placeholder="Search"
-                                    minLength={2}
-                                    autoFocus={false}
-                                    returnKeyType="search"
-                                    fetchDetails={true}
-                                    enablePoweredByContainer={false}
-                                    listViewDisplayed="auto"
-                                    currentLocation={false}
-                                    textInputProps={{
-                                        placeholderTextColor: Colors.contentLetters,
-                                    }}
-                                    onPress={(data, details) => {
-
-                                        handlePlaceSelected(data, details, index);
-
-                                    }}
-                                    // fetchDetails={true}
-                                    query={{
-                                        key: "AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8",
-                                        language: "en",
-                                        components: "country:lk",
-                                        location: `${currentLocation.latitude},${currentLocation.longitude}`,
-                                    }}
-                                    styles={{
-                                        textInputContainer: {
-                                            backgroundColor: 'rgba(0,0,0,0)',
-                                            borderTopWidth: 0,
-                                            borderBottomWidth: 0,
-                                            color: Colors.contentLetters
-                                        },
-                                        textInput: {
-                                            marginLeft: 0,
-                                            marginRight: 0,
-                                            height: 38,
-                                            color: Colors.contentLetters,
-                                            fontSize: 16,
-                                        },
-                                        description: { textColor: Colors.contentLetters, color: Colors.contentLetters },
-                                    }}
-                                />
-
-                                {index > 0 &&
-                                // <Button title="Remove" onPress={() => handleRemoveTextInput(index)}/>
-
-                                <View style={{alignItems:'center', justifyContent:'center'}}>
-                                    <TouchableOpacity
-                                        onPress={() => handleRemoveTextInput(index)}
-                                        style={{
-                                            backgroundColor:Colors.colorD,padding:8,alignItems:'center',borderRadius:10,width:'100%',
-                                            marginLeft:10
-                                        }}>
-                                        <Text style={{fontWeight:'bold',color:Colors.colorA, fontSize:10}}>Remove</Text>
-                                    </TouchableOpacity>
-                                </View>
-
-                                }
-                            </View>
-                        ))}
-
-                        {locationsInputs.length === 0 ? (
-                            <View style={{alignItems:'center', justifyContent:'center'}}>
-                                <TouchableOpacity onPress={handleAddTextInput} style={{
-                                    backgroundColor:Colors.colorD,padding:15,alignItems:'center',borderRadius:50,width:'90%',
-                                }}>
-                                    <Text style={{fontWeight:'bold',color:Colors.colorA}}>Add Origin</Text>
-                                </TouchableOpacity>
-                            </View>
-
-                        ) : (
-                            <View style={{alignItems:'center', justifyContent:'center'}}>
-                                <TouchableOpacity disabled={locationsInputs.length>20}  onPress={handleAddTextInput} style={{
-                                    backgroundColor:Colors.colorD,padding:7,alignItems:'center',borderRadius:50,width:'100%',
-                                    opacity: locationsInputs.length>20 ? 0.8 :1
-                                }}>
-                                    <Text style={{fontWeight:'bold',color:Colors.colorA}}>Add Stop</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-
-                    </View>
-                </ScrollView>
-
-            </View>
             <View style={{flex: 10}}>
-
                 <MapView
                     // provider={PROVIDER_GOOGLE}
                     style={styles.map}
@@ -324,12 +175,6 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
                         longitudeDelta: currentLocation.longitudeDelta,
                     }}
                 >
-
-
-
-
-
-
                     {locationsInputs.map((locationsInput, index) => (
                         <>
                             {locationsInput.latitude !== null && (
@@ -340,17 +185,17 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
                                         //     latitude: locationsInput.latitude,
                                         //     longitude: locationsInput.longitude,
                                         // }}
-                                        draggable
+                                        // draggable
                                         coordinate={locationsInput}
                                         onDragEnd={(e) => handleDragEnd(e, index)}
-                                        title={String.fromCharCode(65+index)}
+                                        title={locationsInput.label}
                                         description={locationsInput.description}
                                     >
-                                        {/*<Image source={require('../../assets/start.png')} style={{height: 60, width:40 }} />*/}
+                                        {/*<Image source={require('../../../assets/start.png')} style={{height: 60, width:40 }} />*/}
                                         {index === 0 ? (
-                                            <Image source={require('../../../../assets/start.png')} style={{height: 60, width:40 }} />
+                                            <Image source={require('../../../assets/start.png')} style={{height: 60, width:40 }} />
                                         ) : (
-                                            <Image source={require('../../../../assets/stop.png')} style={{height: 60, width:40 }} />
+                                            <Image source={require('../../../assets/stop.png')} style={{height: 60, width:40 }} />
                                         )}
                                     </Marker>
                                     <Circle center={locationsInput} radius={1000} />
@@ -386,10 +231,6 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
                     )}
 
                 </MapView>
-
-
-
-
                 {/* Button positioned at the bottom right */}
                 <TouchableOpacity
                     onPress={() => setModalVisible(true)}
@@ -410,10 +251,8 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
                         elevation: 4
                     }}
                 >
-                    <Text style={{ color: Colors.colorD, fontWeight: 'bold' }}>Start</Text>
+                    <Text style={{ color: Colors.colorD, fontWeight: 'bold' }}>Request</Text>
                 </TouchableOpacity>
-
-
 
             </View>
             <View style={styles.centeredView}>
@@ -427,8 +266,7 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
                     }}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            {/*<Image source={require('../../../../assets/images/success.png')}/>*/}
-                            <Text style={{fontWeight:'bold',color:Colors.colorE,marginVertical:10}}>Are you Ready?</Text>
+                            <Text style={{fontWeight:'bold',color:Colors.colorE,marginVertical:10}}>Are you sure?</Text>
 
                             <TouchableOpacity onPress={handleStart} style={{backgroundColor:Colors.colorA,padding:10,alignItems:'center',borderRadius:50,width:240}}>
                                 <Text style={{fontWeight:'bold',color:Colors.colorD}}>Yes</Text>
@@ -441,9 +279,7 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
         </View>
     );
 }
-// const styles = StyleSheet.create({
-//
-// });
+
 
 const styles = StyleSheet.create({
     map: {
@@ -477,3 +313,4 @@ const styles = StyleSheet.create({
         zIndex: -1,
     },
 });
+

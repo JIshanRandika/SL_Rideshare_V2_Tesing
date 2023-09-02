@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     StyleSheet, Button, Modal, Alert,
 } from 'react-native';
-import { Colors } from '../../../../constants/colors';
+import { Colors } from '../../../constants/colors';
 import MapView, {Circle, Marker} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import {useState} from 'react';
@@ -17,7 +17,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import axios from 'axios';
 import {FormItem} from 'react-native-form-component';
 
-export default function LiveDriveCreateMapScreen({ navigation }) {
+export default function HireCreateMapScreen({ navigation }) {
 
 
     const [locationsInputs, setLocationsInput] = useState([]);
@@ -25,8 +25,7 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const handleStart = () => {
-        setModalVisible(!modalVisible);
-        navigation.navigate('liveDriving');
+        navigation.navigate('availableHiringVehicles');
     };
     const [routeName, setRouteName] = React.useState('');
 
@@ -348,9 +347,9 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
                                     >
                                         {/*<Image source={require('../../assets/start.png')} style={{height: 60, width:40 }} />*/}
                                         {index === 0 ? (
-                                            <Image source={require('../../../../assets/start.png')} style={{height: 60, width:40 }} />
+                                            <Image source={require('../../../assets/start.png')} style={{height: 60, width:40 }} />
                                         ) : (
-                                            <Image source={require('../../../../assets/stop.png')} style={{height: 60, width:40 }} />
+                                            <Image source={require('../../../assets/stop.png')} style={{height: 60, width:40 }} />
                                         )}
                                     </Marker>
                                     <Circle center={locationsInput} radius={1000} />
@@ -392,7 +391,7 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
 
                 {/* Button positioned at the bottom right */}
                 <TouchableOpacity
-                    onPress={() => setModalVisible(true)}
+                    onPress={handleStart}
                     style={{
                         position: 'absolute',
                         bottom: 20,
@@ -410,34 +409,13 @@ export default function LiveDriveCreateMapScreen({ navigation }) {
                         elevation: 4
                     }}
                 >
-                    <Text style={{ color: Colors.colorD, fontWeight: 'bold' }}>Start</Text>
+                    <Text style={{ color: Colors.colorD, fontWeight: 'bold' }}>Next</Text>
                 </TouchableOpacity>
 
 
 
             </View>
-            <View style={styles.centeredView}>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                        setModalVisible(!modalVisible);
-                    }}>
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            {/*<Image source={require('../../../../assets/images/success.png')}/>*/}
-                            <Text style={{fontWeight:'bold',color:Colors.colorE,marginVertical:10}}>Are you Ready?</Text>
 
-                            <TouchableOpacity onPress={handleStart} style={{backgroundColor:Colors.colorA,padding:10,alignItems:'center',borderRadius:50,width:240}}>
-                                <Text style={{fontWeight:'bold',color:Colors.colorD}}>Yes</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.blurredBackground} />
-                </Modal>
-            </View>
         </View>
     );
 }

@@ -1,3 +1,5 @@
+
+// =================================
 import * as React from 'react';
 import {
     Image,
@@ -19,6 +21,7 @@ import {FormItem} from 'react-native-form-component';
 
 export default function ScheduledDriveMapCreateScreen({ navigation }) {
 
+
     const [locationsInputs, setLocationsInput] = useState([]);
     const [currentLocationDescription, setCurrentLocationDescription] = useState('Choose on map');
 
@@ -30,11 +33,16 @@ export default function ScheduledDriveMapCreateScreen({ navigation }) {
     const [routeName, setRouteName] = React.useState('');
 
     const handleAddTextInput = () => {
-        const newLabel = String.fromCharCode(65 + locationsInputs.length); // Generate the alphabetical label
-        setLocationsInput([...locationsInputs, { label: newLabel, description: '', latitude: null, longitude: null }]);
+        setLocationsInput([...locationsInputs, { description: '', latitude: null, longitude: null }]);
     };
 
+    const [isSearching, setIsSearching] = useState(false);
     const handlePlaceSelected = (data, details, index) => {
+
+        console.log("data")
+        console.log(data)
+        console.log("details")
+        console.log(details)
         const updatedInputs = [...locationsInputs];
         updatedInputs[index] = {
             ...updatedInputs[index],
@@ -52,14 +60,37 @@ export default function ScheduledDriveMapCreateScreen({ navigation }) {
             latitudeDelta: currentLocation.latitudeDelta,
             longitudeDelta: currentLocation.longitudeDelta,
         });
+        // if (details.geometry.location.lat!=null){
+        //     setIsSearching(false)
+        // }
+
     };
 
     const handleRemoveTextInput = (index) => {
+        // setLocationsInput(locationsInputs.filter((loc, id) => id !==index))
+
         const updatedInputs = [...locationsInputs];
         updatedInputs.splice(index, 1);
         setLocationsInput(updatedInputs);
     };
 
+    React.useEffect(() => {
+        console.log(locationsInputs)
+        setIsSearching(false)
+        // if (locationsInputs.longitude!=null){
+        //     setIsSearching(false)
+        // }
+
+    },[locationsInputs])
+
+    React.useEffect(() => {
+        console.log(isSearching)
+        // setIsSearching(false)
+        // if (locationsInputs.longitude!=null){
+        //     setIsSearching(false)
+        // }
+
+    },[isSearching])
 
 
 
@@ -164,20 +195,37 @@ export default function ScheduledDriveMapCreateScreen({ navigation }) {
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.background }}>
-            <View style={{backgroundColor: Colors.colorA, opacity:1, maxHeight:200 }}>
+            <View style={{backgroundColor: Colors.colorA, opacity:1, maxHeight: isSearching ? '100%' : 200 }}>
                 <ScrollView keyboardShouldPersistTaps="handled">
                     <View style={{ flex: 1, padding: 16}}>
                         {locationsInputs.map((locationsInput, index) => (
                             <View key={index} style={{ marginTop: 8, flexDirection: 'row', alignItems: 'center'}}>
                                 {/* Display alphabetical label in front of the input */}
                                 <View style={{backgroundColor:Colors.colorD, width:30, height:30, borderRadius:50, alignItems:'center', justifyContent:'center', marginRight:5}}>
-                                    <Text style={{ fontSize: 15, color:Colors.contentLetters }}>{locationsInput.label}</Text>
+                                    <Text style={{ fontSize: 15, color:Colors.contentLetters }}>
+                                        {/*{locationsInput.label}*/}
+                                        {String.fromCharCode(65+index)}
+                                    </Text>
                                 </View>
                                 <GooglePlacesAutocomplete
+                                    ref={ref => {
+                                        if (ref?.getAddressText() && ref?.getAddressText().length<6){
+                                            setIsSearching(true)
+                                        }
+
+                                        setTimeout(()=>{
+                                            ref?.setAddressText(locationsInput && locationsInput.description)
+                                            // setIsSearching(true)
+                                        },1500)
+
+                                    }}
                                     predefinedPlaces={[yourLocation,chooseOnMap]}
                                     predefinedPlacesAlwaysVisible={true}
                                     // description={locationsInput.description}
-                                    // value={currentLocationDescription}
+                                    // description={locationsInput.description}
+                                    // onTextInputFocus={() => setIsSearching(true)}
+                                    // onTextInputBlur={() => setIsSearching(false)}
+
 
 
 
@@ -194,7 +242,11 @@ export default function ScheduledDriveMapCreateScreen({ navigation }) {
                                     textInputProps={{
                                         placeholderTextColor: Colors.contentLetters,
                                     }}
-                                    onPress={(data, details) => handlePlaceSelected(data, details, index)}
+                                    onPress={(data, details) => {
+
+                                        handlePlaceSelected(data, details, index);
+
+                                    }}
                                     // fetchDetails={true}
                                     query={{
                                         key: "AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8",
@@ -247,11 +299,11 @@ export default function ScheduledDriveMapCreateScreen({ navigation }) {
                                 </TouchableOpacity>
                             </View>
 
-                            // <Button title="Add Origin" onPress={handleAddTextInput} />
                         ) : (
                             <View style={{alignItems:'center', justifyContent:'center'}}>
-                                <TouchableOpacity onPress={handleAddTextInput} style={{
+                                <TouchableOpacity disabled={locationsInputs.length>20}  onPress={handleAddTextInput} style={{
                                     backgroundColor:Colors.colorD,padding:7,alignItems:'center',borderRadius:50,width:'100%',
+                                    opacity: locationsInputs.length>20 ? 0.8 :1
                                 }}>
                                     <Text style={{fontWeight:'bold',color:Colors.colorA}}>Add Stop</Text>
                                 </TouchableOpacity>
@@ -293,10 +345,10 @@ export default function ScheduledDriveMapCreateScreen({ navigation }) {
                                         draggable
                                         coordinate={locationsInput}
                                         onDragEnd={(e) => handleDragEnd(e, index)}
-                                        title={locationsInput.label}
+                                        title={String.fromCharCode(65+index)}
                                         description={locationsInput.description}
                                     >
-                                        {/*<Image source={require('../../../assets/start.png')} style={{height: 60, width:40 }} />*/}
+                                        {/*<Image source={require('../../assets/start.png')} style={{height: 60, width:40 }} />*/}
                                         {index === 0 ? (
                                             <Image source={require('../../../../assets/start.png')} style={{height: 60, width:40 }} />
                                         ) : (

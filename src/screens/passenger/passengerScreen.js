@@ -13,6 +13,7 @@ import Driver from '../../assets/icons/Driver';
 import Offers from '../../assets/icons/Offers';
 import Details from '../../assets/icons/Details';
 import Statistics from '../../assets/icons/Statistics';
+import FindHire from '../../assets/icons/FindHire';
 
 export default function PassengerScreen({navigation}) {
 
@@ -94,11 +95,11 @@ export default function PassengerScreen({navigation}) {
                 <View style={{flexDirection:'row', flex:3,width:"100%"}}>
                     <View style={{flexDirection:'column', flex:6,width:20,alignItems:'center',justifyContent:'center'}}>
                         <TouchableOpacity
-
+                            onPress={()=>navigation.navigate('hireFind')}
                             style={{flexDirection:'row',backgroundColor:'white',width:'80%',height:'70%', borderRadius:10, shadowColor: Colors.colorE, shadowOffset: {width: 0, height: 2,}, shadowOpacity:  0.17, shadowRadius: 2.54, elevation: 3, alignItems:'center',justifyContent:'center'
                             }}>
                             <View style={{flex:5, alignItems:'center',justifyContent:'center'}}>
-                                <Hire width={42} height={42} iconColor={Colors.colorA}/>
+                                <FindHire width={42} height={42} iconColor={Colors.colorA}/>
                             </View>
                             <View style={{flex:7}}>
                                 <Text style={{color:Colors.contentLetters,fontWeight:'bold',fontSize:12,marginTop:3}}>Hire</Text>

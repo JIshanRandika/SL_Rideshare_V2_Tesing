@@ -25,6 +25,7 @@
     "react-native-camera": "^4.2.1",
     "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-date-picker": "^4.2.10",
+    "react-native-fast-image": "^8.6.3",
     "react-native-form-component": "^2.6.10",
     "react-native-fs": "^2.20.0",
     "react-native-geolocation-service": "^5.3.1",

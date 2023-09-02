@@ -14,6 +14,7 @@ import AvailableRIdesDetailViewMapScreen
     from '../screens/driver/vehicle/availableRides/availableRIdesDetailViewMapScreen';
 import AvailableDrivesDetailViewScreen from '../screens/passenger/availableDrives/availableDrivesDetailViewScreen';
 import AvailableDrivesMapViewScreen from '../screens/passenger/availableDrives/availableDrivesMapViewScreen';
+import HireFindNavigation from './hireFindNavigation';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,13 @@ export default function PassengerNavigation() {
                 component={LiveWalkingNavigation}
                 options={{headerShown:false}}
             />
+
+            <Stack.Screen
+                name="hireFind"
+                component={HireFindNavigation}
+                options={{headerShown:false}}
+            />
+
             <Stack.Screen
                 name="scheduledRides"
                 component={ScheduledRideNavigation}

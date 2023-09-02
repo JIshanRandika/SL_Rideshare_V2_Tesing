@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 export default function LiveWalkingNavigation() {
     return (
         <Stack.Navigator
-            initialRouteName="scheduledDrives"
+            initialRouteName="liveWalk"
             screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: Colors.colorD,

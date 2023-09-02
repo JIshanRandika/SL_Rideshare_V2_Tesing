@@ -15,6 +15,7 @@ import VehicleNavigation from './vehicleNavigation';
 import ScheeduledDriveNavigation from './scheeduledDriveNavigation';
 import LiveDriveNavigation from './liveDriveNavigation';
 import VehicleStatisticsScreen from '../screens/driver/vehicle/vehicleStatistics/vehicleStatisticsScreen';
+import HireScreen from '../screens/driver/vehicle/hire/hireScreen';
 
 const Stack = createStackNavigator();
 
@@ -110,6 +111,12 @@ export default function DriverNavigation() {
                 name="vehicleStatistics"
                 component={VehicleStatisticsScreen}
                 options={{headerTitle:'Vehicle Statistics'}}
+            />
+
+            <Stack.Screen
+                name="vehicleHire"
+                component={HireScreen}
+                options={{headerTitle:'Hire'}}
             />
 
 
